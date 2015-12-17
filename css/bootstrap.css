@@ -274,7 +274,7 @@ th {
 }
 .login, .signup {
   background-image: url(bluespace.jpg);
-  /*color: white;*/
+  color: white;
   margin-left: 1px;
   margin-right: 1px;
 }

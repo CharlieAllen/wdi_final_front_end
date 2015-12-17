@@ -13,9 +13,9 @@ function createSearch(keyword) {
     });
 }
 
-MainController.$inject = ['$window', 'YOUTUBE_URL', 'TokenService', 'User', '$location'];
+MainController.$inject = ['$window', '$scope', 'YOUTUBE_URL', 'TokenService', 'User', '$location'];
 
-function MainController($window, YOUTUBE_URL, TokenService, User, $location){
+function MainController($window, $scope, YOUTUBE_URL, TokenService, User, $location){
 
   // $scope.user = {}
 
@@ -26,13 +26,13 @@ function MainController($window, YOUTUBE_URL, TokenService, User, $location){
   self.youtubeLoaded = false;
   self.loading = false;
 
-  // $window.init = function() {
-  //   gapi.client.load('youtube', 'v3').then(function() {
-  //     gapi.client.setApiKey('AIzaSyDTU2aqu4zGnwda1KYKF2VwLYqG8hcTaM8');
-  //     self.youtubeLoaded = true;
-  //     search();
-  //   });
-  // }
+  $window.init = function() {
+    gapi.client.load('youtube', 'v3').then(function() {
+      gapi.client.setApiKey('AIzaSyDTU2aqu4zGnwda1KYKF2VwLYqG8hcTaM8');
+      self.youtubeLoaded = true;
+      search();
+    });
+  }
 
   function handleLogin(res, path) {
     var token = res.token ? res.token : null;
