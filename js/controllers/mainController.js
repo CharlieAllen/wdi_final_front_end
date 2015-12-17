@@ -16,6 +16,7 @@ function createSearch(keyword) {
 MainController.$inject = ['$window', '$scope', 'YOUTUBE_URL', 'TokenService', 'User', '$location'];
 
 function MainController($window, $scope, YOUTUBE_URL, TokenService, User, $location){
+
   var main = this;
 
   this.all = [];
@@ -31,21 +32,20 @@ function MainController($window, $scope, YOUTUBE_URL, TokenService, User, $locat
     });
   }
 
-  function handleLogin(res) {
+  function handleLogin(res, path) {
     var token = res.token ? res.token : null;
 
     if (token) {
       TokenService.saveToken(token);
       main.user = TokenService.decodeToken();
       main.getUsers();
+      $location.path(path);
     }
-
-    main.message = res.message;
   }
 
   main.register = function() {
-     User.register(main.user, handleLogin);
-     $location.path('/');
+     User.register(main.user, handleLogin, '/');
+     // $location.path('/');
    }
 
   main.updateUser = function() {
@@ -53,15 +53,15 @@ function MainController($window, $scope, YOUTUBE_URL, TokenService, User, $locat
   }
 
   main.login = function() {
-    User.login(main.user, handleLogin);
-    $location.path('/profile');
+    User.login(main.user, handleLogin, '/profile');
+    // $location.path('/profile');
   }
 
   main.disappear = function() {
     TokenService.removeToken();
     main.all = [];
     main.user = {};
-    $location.path('/');
+    // $location.path('/');
   }
 
   main.getUsers = function() {
@@ -70,7 +70,6 @@ function MainController($window, $scope, YOUTUBE_URL, TokenService, User, $locat
 
   main.isLoggedIn = function() {
     return !!TokenService.getToken();
-    $location.path('/');
   }
 
   if (main.isLoggedIn()) {
@@ -111,7 +110,7 @@ function MainController($window, $scope, YOUTUBE_URL, TokenService, User, $locat
     var index = main.user.favourite_videos.indexOf(videoId);
     main.user.favourite_videos.splice(index, 1);
     User.update({ id: main.user._id }, main.user, function() {
-    console.log('removed a video to a user');
+    //console.log('removed a video to a user');
     });
   }
 

@@ -21,10 +21,14 @@ function whitelistUrls($sceDelegateProvider, YOUTUBE_URL){
   $sceDelegateProvider.resourceUrlWhitelist([
     'self', 
     YOUTUBE_URL + '**'
-  ])
+  ]);
 };
 
+
+
+MainRouter.$inject = ["$stateProvider", "$urlRouterProvider"];
 function MainRouter($stateProvider, $urlRouterProvider) {
+  console.log("MainRouter")
   $stateProvider
     .state('home', {
       url: '/',
