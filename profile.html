@@ -1,0 +1,95 @@
+<section class="profile-page" ng-show="main.isLoggedIn()">
+  <hr>
+  <div class="panel panel-default">  
+    <h3 class="profile">Your Profile</h3>
+
+    <div class="panel-body">
+      <h4>Favourite Videos</h4> 
+
+      <div ng-repeat="videoId in main.user.favourite_videos">
+        <iframe width="560" 
+          height="315" 
+          src="{{videoId}}" 
+          frameborder="0" 
+          allowfullscreen></iframe>
+        <input type="submit"
+          id="remove-from-favs-btn"
+          class="btn btn-default btn-sm"
+          ng-click="main.unsaveVideoFromUser(videoId)"
+          value="Remove From Favourites">
+      </div>
+
+
+        <input type="submit"
+          id="edit-profile-btn"
+          ng-click="showProfile = !showProfile"
+          ng-init="showProfile = false" 
+          class="btn btn-default btn-sm"
+          value="Edit Your Profile">
+
+        <form id="edit-user-form" 
+          ng-if="showProfile"
+          ng-submit="main.updateUser(main.user)">
+
+        <input type="submit"
+          id="edit-profile-btn" 
+          class="btn btn-default btn-sm"
+          value="Save Changes">
+
+        <div class="form-group" id="edit-user-form">
+          <label for="inputName" 
+            class="col-lg-2 control-label">Name</label>
+            <div class="col-lg-10">
+              <input type="text" 
+                class="form-control" 
+                id="name" 
+                placeholder="Name" 
+                ng-model="main.user.name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputLocation" 
+            class="col-lg-2 control-label">Location</label>
+          <div class="col-lg-10">
+            <input type="text" 
+              class="form-control" 
+              id="name" 
+              placeholder="Name" 
+              ng-model="main.user.location">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputIndustry" 
+          class="col-lg-2 control-label">Industry</label>
+          <div class="col-lg-10">
+            <input type="text" 
+              class="form-control" 
+              id="industry" 
+              placeholder="Industry" 
+              ng-model="main.user.industry">
+        </div>
+        </div>
+        <div class="form-group">
+          <label for="inputEmail" 
+            class="col-lg-2 control-label">Email Address</label>
+          <div class="col-lg-10">
+            <input type="text" 
+              class="form-control" 
+              id="email" 
+              placeholder="Email" 
+              ng-model="main.user.email">
+          </div>
+        </div>
+      <div class="form-group">
+        <label for="textArea" 
+          class="col-lg-2 control-label">About Me</label>
+        <div class="col-lg-10">
+          <textarea class="form-control" 
+            rows="3" 
+            id="textArea" 
+            ng-model="users.user.about_me"></textarea>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

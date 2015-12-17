@@ -1,0 +1,36 @@
+.jumbohead {
+  text-align: center;
+}
+.profile-page {
+  background-image: url(bluespace.jpg);
+  background-size: cover;
+  padding-bottom: 500px;
+}
+.profile {
+  margin-left: 20px;
+  font-weight: strong;
+}
+.logout {
+  cursor: pointer;
+}
+#edit-profile-btn {
+  margin-bottom: 10px; 
+  margin-top: 5px;
+}
+#remove-from-favs-btn{
+  display: block;
+}
+.about-header {
+  padding-left: 10px;
+}
+section.about.ng-scope {
+  background-image: url(bluespace.jpg);
+  background-size: cover;
+  padding-bottom: 500px;
+  font-size: 15px;
+}
+section.login.ng-scope{
+  background-image: url(bluespace.jpg);
+  background-size: cover;
+  padding-bottom: 500px;
+}
