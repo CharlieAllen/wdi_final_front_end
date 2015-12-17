@@ -6,7 +6,7 @@ function youtubeDirective(){
   var directive = {};
   directive.restrict = 'E';
   directive.replace = true;
-  directive.templateUrl = '_youtubeView.html';
+  directive.templateUrl = 'youtubeView.html';
   directive.scope = {
     videoId: '='
   }
