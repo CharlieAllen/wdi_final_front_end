@@ -97,6 +97,7 @@ function MainController($window, $scope, YOUTUBE_URL, TokenService, User, $locat
         });
 
         self.loading = false;
+        self.keyword = "";
       });
     });
   };
