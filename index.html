@@ -71,7 +71,9 @@
 					</form>
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a ng-click="main.disappear()" class="logout">Logout</a>
+							<a ng-click="main.disappear()" 
+								ng-if="main.isLoggedIn()"
+								class="logout">Logout</a>
 						</li>
 		      </ul>
 		    </div>
