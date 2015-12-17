@@ -1,7 +1,7 @@
 angular
   .module('tedchatApp', ['ui.router', 'angular-jwt', 'ngResource'])
   .constant('YOUTUBE_URL', 'https://www.youtube.com/embed/')
-  .constant('API', 'http://localhost:3000/')
+  .constant('API', 'http://tedchat.herokuapp.com/')
   .config(whitelistUrls)
   .config(MainRouter)
   .config(function($httpProvider){
@@ -10,9 +10,9 @@ angular
 
 
 //Google API callback function...
-// function init() {
-//   window.init();
-// };
+function init() {
+  window.init();
+};
 
 
 whitelistUrls.$inject = ['$sceDelegateProvider', 'YOUTUBE_URL'];
