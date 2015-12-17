@@ -82,6 +82,14 @@ function MainController($window, $scope, YOUTUBE_URL, TokenService, User, $locat
     });
   }
 
+  self.deleteUser = function() {
+    User.delete({ id: loggedInUser._id}, function(res){
+      console.log('deleted user successfully');
+      self.disappear();
+      $location.path('/');
+    })
+  }
+
   self.videoIds = [];
 
   self.keyword = "";
@@ -97,7 +105,6 @@ function MainController($window, $scope, YOUTUBE_URL, TokenService, User, $locat
         });
 
         self.loading = false;
-        // TODO - REDIRECT TO INDEX ON SEARCH IF USER ISN'T ALREADY THERE
         $location.path('/');
         self.keyword = "";
       });

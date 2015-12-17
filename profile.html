@@ -26,6 +26,10 @@
           ng-init="showProfile = false" 
           class="btn btn-default btn-sm"
           value="Edit Your Profile">
+        <input type="button"
+          class="btn btn-primary btn-sm" 
+          ng-click="main.deleteUser(main.user)" 
+          value="Delete Your Profile">
 
         <form id="edit-user-form" 
           ng-if="showProfile"
