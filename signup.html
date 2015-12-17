@@ -1,4 +1,7 @@
-<section ng-hide="users.isLoggedIn()" class="signup">
+<section ng-hide="main.isLoggedIn()" class="signup">
+
+{{ main.user }}
+
   <form class="form-horizontal" ng-submit="main.register()">
     <fieldset>
         <h3 class="signup">Create Your Account</h3>
@@ -9,9 +12,9 @@
               <input type="text" 
                 class="form-control" 
                 id="name" 
-                placeholder="Name" 
+                placeholder="Name"
                 ng-model="main.user.name">
-          </div>
+            </div>
         </div>
         <div class="form-group">
             <label for="inputLocation" 
@@ -20,7 +23,7 @@
               <input type="text" 
                 class="form-control" 
                 id="name" 
-                placeholder="Name" 
+                placeholder="Name"
                 ng-model="main.user.location">
           </div>
         </div>
@@ -31,7 +34,7 @@
             <input type="text" 
               class="form-control" 
               id="industry" 
-              placeholder="Industry" 
+              placeholder="Industry"
               ng-model="main.user.industry">
           </div>
         </div>
@@ -42,7 +45,7 @@
               <input type="text" 
                 class="form-control" 
                 id="email" 
-                placeholder="Email" 
+                placeholder="Email"
                 ng-model="main.user.email">
           </div>
         </div>
@@ -53,7 +56,7 @@
               <input type="password" 
                 class="form-control"
                 id="password" 
-                placeholder="Password" 
+                placeholder="Password"
                 ng-model="main.user.password">
             </div>
         </div>
@@ -63,8 +66,8 @@
           <div class="col-lg-10">
             <textarea class="form-control" 
               rows="3" 
-              id="textArea" 
-              ng-model="users.user.about_me"></textarea>
+              id="textArea"
+              ng-model="main.user.about_me"></textarea>
           </div>
         </div>
         <div class="form-group">

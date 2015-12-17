@@ -9,7 +9,7 @@ angular
   });
 
 
-//Google API callback function...
+// Google API callback function...
 function init() {
   window.init();
 };

@@ -13,106 +13,108 @@ function createSearch(keyword) {
     });
 }
 
-MainController.$inject = ['$window', '$scope', 'YOUTUBE_URL', 'TokenService', 'User', '$location'];
+MainController.$inject = ['$window', 'YOUTUBE_URL', 'TokenService', 'User', '$location'];
 
-function MainController($window, $scope, YOUTUBE_URL, TokenService, User, $location){
+function MainController($window, YOUTUBE_URL, TokenService, User, $location){
 
-  var main = this;
+  // $scope.user = {}
+
+  var self = this;
 
   this.all = [];
-  main.user = {};
-  main.youtubeLoaded = false;
-  main.loading = false;
+  self.user = {};
+  self.youtubeLoaded = false;
+  self.loading = false;
 
-  $window.init = function() {
-    gapi.client.load('youtube', 'v3').then(function() {
-      gapi.client.setApiKey('AIzaSyDTU2aqu4zGnwda1KYKF2VwLYqG8hcTaM8');
-      main.youtubeLoaded = true;
-      search();
-    });
-  }
+  // $window.init = function() {
+  //   gapi.client.load('youtube', 'v3').then(function() {
+  //     gapi.client.setApiKey('AIzaSyDTU2aqu4zGnwda1KYKF2VwLYqG8hcTaM8');
+  //     self.youtubeLoaded = true;
+  //     search();
+  //   });
+  // }
 
   function handleLogin(res, path) {
     var token = res.token ? res.token : null;
 
     if (token) {
       TokenService.saveToken(token);
-      main.user = TokenService.decodeToken();
-      main.getUsers();
+      self.user = TokenService.decodeToken();
+      self.getUsers();
       $location.path(path);
     }
   }
 
-  main.register = function() {
-     User.register(main.user, handleLogin, '/');
+  self.register = function() {
+     User.register(self.user, handleLogin, '/');
      // $location.path('/');
    }
 
-  main.updateUser = function() {
-    User.update({ id: main.user._id }, main.user);  
+  self.updateUser = function() {
+    User.update({ id: self.user._id }, self.user);  
   }
 
-  main.login = function() {
-    User.login(main.user, handleLogin, '/profile');
+  self.login = function() {
+    User.login(self.user, handleLogin, '/profile');
     // $location.path('/profile');
   }
 
-  main.disappear = function() {
+  self.disappear = function() {
     TokenService.removeToken();
-    main.all = [];
-    main.user = {};
+    self.all = [];
+    self.user = {};
     // $location.path('/');
   }
 
-  main.getUsers = function() {
-    main.all = User.query();
+  self.getUsers = function() {
+    self.all = User.query();
   }
 
-  main.isLoggedIn = function() {
+  self.isLoggedIn = function() {
     return !!TokenService.getToken();
   }
 
-  if (main.isLoggedIn()) {
-    main.getUsers();
+  if (self.isLoggedIn()) {
+    self.getUsers();
     var loggedInUser = TokenService.decodeToken();
     User.get({ id: loggedInUser._id }, function(res) {
-      main.user = res.user;
+      self.user = res.user;
     });
   }
 
-  main.videoIds = [];
+  self.videoIds = [];
 
-  main.keyword = "";
+  self.keyword = "";
 
   function search() {
-    main.loading = true;
-    createSearch(main.keyword).execute(function(res) {
+    self.loading = true;
+    createSearch(self.keyword).execute(function(res) {
 
       // $scope.apply forces angular to refresh the view
       $scope.$apply(function() {
-        main.videoIds = res.items.map(function(item) {
+        self.videoIds = res.items.map(function(item) {
           return YOUTUBE_URL + item.id.videoId;
         });
 
-        main.loading = false;
+        self.loading = false;
       });
     });
   };
 
-  main.saveVideoToUser = function(videoId) {
-    main.user.favourite_videos.push(videoId);
-    User.update({ id: main.user._id }, main.user, function() {
+  self.saveVideoToUser = function(videoId) {
+    self.user.favourite_videos.push(videoId);
+    User.update({ id: self.user._id }, self.user, function() {
       //console.log('added a video to a user');
     });
   }
 
-  main.unsaveVideoFromUser = function(videoId) {
-    var index = main.user.favourite_videos.indexOf(videoId);
-    main.user.favourite_videos.splice(index, 1);
-    User.update({ id: main.user._id }, main.user, function() {
+  self.unsaveVideoFromUser = function(videoId) {
+    var index = self.user.favourite_videos.indexOf(videoId);
+    self.user.favourite_videos.splice(index, 1);
+    User.update({ id: self.user._id }, self.user, function() {
     //console.log('removed a video to a user');
     });
   }
 
-  main.search = search;
+  self.search = search;
 }
